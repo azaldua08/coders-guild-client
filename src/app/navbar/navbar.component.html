@@ -15,7 +15,7 @@
       </li>
     </ul>
     <ul class="nav navbar-nav navbar-right">
-      <li class="clearfix float-right" *ngIf="user !== undefined && user.username != ''">
+      <li *ngIf="user !== undefined && user.username != ''">
         <a href="#">Welcome {{ user.username }}</a>
       </li>
       <li *ngIf="user !== undefined && user.username != ''">

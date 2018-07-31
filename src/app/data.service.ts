@@ -5,7 +5,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
   providedIn: 'root'
 })
 export class DataService {
-
+  employee: Object;
   constructor(private http: HttpClient) { }
 
   getEmployeesByLevel() {
@@ -18,4 +18,15 @@ export class DataService {
     return this.http.get('http://localhost:8080/coders-guild/api/employeesbybadges');
   }
 
+  getEmployeeByUsername(username) {
+    return this.http.get('http://localhost:8080/coders-guild/api/employeebyusername/' + username);
+  }
+
+  getEmployee() {
+    return this.employee;
+  }
+
+  setEmployee(employee) {
+    this.employee = employee;
+  }
 }
