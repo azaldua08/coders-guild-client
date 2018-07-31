@@ -11,6 +11,10 @@ import { LevelLeaderboardComponent } from './level-leaderboard/level-leaderboard
 import { BadgeLeaderboardComponent } from './badge-leaderboard/badge-leaderboard.component';
 
 import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { BasicAuthInterceptor } from './basic-auth.interceptor';
+import { FormsModule } from '@angular/forms';
+import { LoginFormComponent } from './login-form/login-form.component';
 
 @NgModule({
   declarations: [
@@ -20,14 +24,22 @@ import { HttpClientModule } from '@angular/common/http';
     AdminPortalComponent,
     EmployeePortalComponent,
     LevelLeaderboardComponent,
-    BadgeLeaderboardComponent
+    BadgeLeaderboardComponent,
+    LoginFormComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    FormsModule
   ],
-  providers: [],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: BasicAuthInterceptor,
+      multi: true
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
