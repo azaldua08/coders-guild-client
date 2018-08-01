@@ -1,7 +1,8 @@
-import { Component, OnInit, OnChanges, DoCheck } from '@angular/core';
+import { Component, OnInit, OnChanges, DoCheck, AfterViewChecked, AfterViewInit } from '@angular/core';
 import { AuthService } from '../auth.service';
 import { User } from '../user';
 import { DataService } from '../data.service';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-navbar',
@@ -10,7 +11,7 @@ import { DataService } from '../data.service';
 })
 export class NavbarComponent implements DoCheck {
   user = new User('', '');
-  employee: Object;
+  employee: Observable<Object>;
   constructor(public authService: AuthService, public data: DataService) { }
 
   ngDoCheck() {

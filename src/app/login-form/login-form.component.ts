@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { User } from '../user';
 import { AuthService } from '../auth.service';
 import { DataService } from '../data.service';
+import { Observable } from 'rxjs';
+import { share } from 'rxjs/operators';
 
 @Component({
   selector: 'app-login-form',
@@ -10,7 +12,8 @@ import { DataService } from '../data.service';
 })
 export class LoginFormComponent implements OnInit {
   user = new User('', '');
-  employee: Object;
+  employee: Observable<Object>;
+
   constructor(private authService: AuthService, private data: DataService) { }
 
   ngOnInit() {
@@ -18,9 +21,7 @@ export class LoginFormComponent implements OnInit {
 
   onSubmit() {
     this.authService.setBasicAuth(this.user);
-    this.data.getEmployeeByUsername(this.user.username).subscribe(
-      data => this.employee = data
-    );
+    this.employee = this.data.getEmployeeByUsername(this.user.username).pipe(share());
     this.data.setEmployee(this.employee);
   }
 
