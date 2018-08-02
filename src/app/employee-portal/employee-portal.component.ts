@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, DoCheck } from '@angular/core';
+import { DataService } from '../data.service';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-employee-portal',
@@ -6,10 +8,15 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./employee-portal.component.css']
 })
 export class EmployeePortalComponent implements OnInit {
-
-  constructor() { }
+  employee: Observable<Object>;
+  toUpdate: boolean;
+  constructor(public data: DataService) { }
 
   ngOnInit() {
+    this.employee = this.data.getEmployee();
   }
 
+  setToUpdate(toUpdate) {
+    this.toUpdate = toUpdate;
+  }
 }
