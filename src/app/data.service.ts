@@ -24,6 +24,10 @@ export class DataService {
     return this.http.get('http://localhost:8080/coders-guild/api/employeebyusername/' + username);
   }
 
+  update(id, employee) {
+    return this.http.put('http://localhost:8080/coders-guild/api/employee/' + id, employee);
+  }
+
   getEmployee() {
     return this.employee;
   }

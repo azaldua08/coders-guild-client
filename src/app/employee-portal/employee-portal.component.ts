@@ -19,4 +19,9 @@ export class EmployeePortalComponent implements OnInit {
   setToUpdate(toUpdate) {
     this.toUpdate = toUpdate;
   }
+
+  updateEmployee(id, employee) {
+    this.employee = this.data.update(id, employee);
+    this.setToUpdate(false);
+  }
 }

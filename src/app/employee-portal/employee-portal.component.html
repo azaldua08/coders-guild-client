@@ -3,7 +3,7 @@
 
 
     <div class="col-md-7 ">
-
+      
       <div *ngIf="employee | async as emp;" class="panel panel-default">
         <div class="panel-heading">
           <h4>User Profile</h4>
@@ -11,7 +11,7 @@
         <div class="panel-body">
 
           <div class="box box-info">
-
+           
             <div class="box-body">
               <div class="col-sm-6">
                 <div align="center">
@@ -34,6 +34,7 @@
 
                 <!-- /input-group -->
               </div>
+              
               <div class="col-sm-6">
                 <h4 style="color:#00b1b1;">{{ emp.name }} </h4>
 
@@ -44,17 +45,17 @@
                     <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
                     <span><strong>Edit</strong></span>            
                 </a>
-                <a (click)="setToUpdate(false)" class="btn btn-primary a-btn-slide-text">
+                <button (click)="updateEmployee(emp.id, emp)" type="button" class="btn btn-primary a-btn-slide-text">
                     <span class="glyphicon glyphicon-save" aria-hidden="true"></span>
                     <span><strong>Save</strong></span>            
-                </a>
+                </button>
               </div>
               <div class="clearfix"></div>
               <hr style="margin:5px 0 5px 0;">
 
 
               <div class="col-sm-5 col-xs-6 tital ">Username:</div>
-              <div class="col-sm-7 col-xs-6 "> 
+              <div class="col-sm-7 col-xs-6"> 
                 <input *ngIf="toUpdate; else dispUname " class="form-control" placeholder="Username" id="username" type="text" autofocus="" required
                 [(ngModel)]="emp.username" name="username" #username="ngModel">
                 <ng-template #dispUname> {{ emp.username }}</ng-template>
@@ -121,7 +122,7 @@
               <!-- /.box-body -->
             </div>
             <!-- /.box -->
-
+          
           </div>
 
 
