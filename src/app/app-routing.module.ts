@@ -38,7 +38,7 @@ const routes: Routes = [
     component: AdminPortalComponent
   },
   {
-    path: 'employee-portal',
+    path: 'employee-portal/:id',
     component: EmployeePortalComponent
   }
 ];

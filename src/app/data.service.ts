@@ -24,6 +24,18 @@ export class DataService {
     return this.http.get('http://localhost:8080/coders-guild/api/employeebyusername/' + username);
   }
 
+  getEmployeeBadges(id) {
+    return this.http.get('http://localhost:8080/coders-guild/api/employeebadges/' + id);
+  }
+
+  getEmployeeSkills(id) {
+    return this.http.get('http://localhost:8080/coders-guild/api/employeeskills/' + id);
+  }
+
+  getEmployeeTrophies(id) {
+    return this.http.get('http://localhost:8080/coders-guild/api/employeetrophies/' + id);
+  }
+
   update(id, employee) {
     return this.http.put('http://localhost:8080/coders-guild/api/employee/' + id, employee);
   }

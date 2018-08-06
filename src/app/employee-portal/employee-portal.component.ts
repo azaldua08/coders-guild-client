@@ -1,6 +1,8 @@
 import { Component, OnInit, DoCheck } from '@angular/core';
 import { DataService } from '../data.service';
 import { Observable } from 'rxjs';
+import { ActivatedRoute } from '@angular/router';
+import { share } from '../../../node_modules/rxjs/operators';
 
 @Component({
   selector: 'app-employee-portal',
@@ -9,11 +11,20 @@ import { Observable } from 'rxjs';
 })
 export class EmployeePortalComponent implements OnInit {
   employee: Observable<Object>;
+  badges: Observable<Object>;
+  skills: Observable<Object>;
+  trophies: Observable<Object>;
+  id: Object;
   toUpdate: boolean;
-  constructor(public data: DataService) { }
+  constructor(private route: ActivatedRoute, private data: DataService) {
+    this.route.params.subscribe( params => this.id = params.id);
+  }
 
   ngOnInit() {
     this.employee = this.data.getEmployee();
+    this.badges = this.data.getEmployeeBadges(this.id).pipe(share());
+    this.skills = this.data.getEmployeeSkills(this.id).pipe(share());
+    this.trophies = this.data.getEmployeeTrophies(this.id).pipe(share());
   }
 
   setToUpdate(toUpdate) {
