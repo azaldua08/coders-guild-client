@@ -3,6 +3,7 @@ import { DataService } from '../data.service';
 import { Observable } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
 import { share } from '../../../node_modules/rxjs/operators';
+import { Skill } from '../skill';
 
 @Component({
   selector: 'app-employee-portal',
@@ -16,6 +17,9 @@ export class EmployeePortalComponent implements OnInit {
   trophies: Observable<Object>;
   id: Object;
   toUpdate: boolean;
+  toAddSkills: boolean;
+  skill: Observable<Object>;
+
   constructor(private route: ActivatedRoute, private data: DataService) {
     this.route.params.subscribe( params => this.id = params.id);
   }
@@ -29,6 +33,15 @@ export class EmployeePortalComponent implements OnInit {
 
   setToUpdate(toUpdate) {
     this.toUpdate = toUpdate;
+  }
+
+  setToAddSkills(toAddSkills) {
+    this.toAddSkills = toAddSkills;
+  }
+
+  createSkill(id, skill) {
+    this.skill = this.data.createSkill(id, skill);
+    this.setToAddSkills(false);
   }
 
   updateEmployee(id, employee) {

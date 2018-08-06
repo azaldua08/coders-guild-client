@@ -32,6 +32,10 @@ export class DataService {
     return this.http.get('http://localhost:8080/coders-guild/api/employeeskills/' + id);
   }
 
+  createSkill(id, skill) {
+    return this.http.post('http://localhost:8080/coders-guild/api/employeeskill/add/' + id, skill);
+  }
+
   getEmployeeTrophies(id) {
     return this.http.get('http://localhost:8080/coders-guild/api/employeetrophies/' + id);
   }

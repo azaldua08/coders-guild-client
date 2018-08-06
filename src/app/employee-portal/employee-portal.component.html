@@ -115,10 +115,32 @@
               <br/>
               <div *ngIf="skills | async as skillList;">
                 <div *ngIf="skillList.length > 0">
-                  <div class="col-sm-5 col-xs-6 tital ">Skills:</div>
+                  <div class="col-sm-5 col-xs-6 tital ">Skills:
+                    <button (click)="setToAddSkills(true)" class="btn btn-primary btn-xs a-btn-slide-text">
+                      <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+                      <span>
+                        <strong>Add</strong>
+                      </span>
+                    </button>
+                  </div>
                   <br/>
+                  <input *ngIf="toAddSkills" class="form-control" placeholder="Add Skill" id="" type="text" autofocus="" required [(ngModel)]="skill.name"
+                    name="skill" #skillModel="ngModel">
+                  <button *ngIf="toAddSkills" (click)="createSkill(emp.id, skill)" type="button" class="btn btn-primary a-btn-slide-text">
+                    <span class="glyphicon glyphicon-save" aria-hidden="true"></span>
+                    <span>
+                      <strong>Add</strong>
+                    </span>
+                  </button>
                   <br/>
-                  <div *ngFor="let skill of skillList" class="col-sm-7"> {{ skill.name }} </div>
+                  <div *ngFor="let skill of skillList" class="col-sm-7">
+                    <a href="#" class="btn btn-primary btn-xs a-btn-slide-text">
+                      <span>
+                        <strong>{{ skill.name }} </strong>
+                      </span>
+                      <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                    </a>
+                  </div>
                 </div>
               </div>
 
