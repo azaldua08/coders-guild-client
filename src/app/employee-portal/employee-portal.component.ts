@@ -18,7 +18,7 @@ export class EmployeePortalComponent implements OnInit {
   id: Object;
   toUpdate: boolean;
   toAddSkills: boolean;
-  skill: Observable<Object>;
+  skill = new Object();
 
   constructor(private route: ActivatedRoute, private data: DataService) {
     this.route.params.subscribe( params => this.id = params.id);
@@ -40,7 +40,9 @@ export class EmployeePortalComponent implements OnInit {
   }
 
   createSkill(id, skill) {
-    this.skill = this.data.createSkill(id, skill);
+    this.data.createSkill(id, skill).subscribe(
+      data => this.skill = data
+    );
     this.setToAddSkills(false);
   }
 
