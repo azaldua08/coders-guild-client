@@ -2,7 +2,9 @@ import { Component, OnInit, DoCheck } from '@angular/core';
 import { DataService } from '../data.service';
 import { Observable } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
-import { share } from '../../../node_modules/rxjs/operators';
+import { share, startWith } from 'rxjs/operators';
+import { combineLatest } from 'rxjs';
+import { map } from 'rxjs/operators';
 import { Skill } from '../skill';
 
 @Component({
@@ -11,10 +13,10 @@ import { Skill } from '../skill';
   styleUrls: ['./employee-portal.component.css']
 })
 export class EmployeePortalComponent implements OnInit {
-  employee: Observable<Object>;
-  badges: Observable<Object>;
-  skills: Observable<Object>;
-  trophies: Observable<Object>;
+  employee$: Observable<Object>;
+  badges$: Observable<Object>;
+  skills$: Object[];
+  trophies$: Observable<Object>;
   id: Object;
   toUpdate: boolean;
   toAddSkills: boolean;
@@ -25,10 +27,12 @@ export class EmployeePortalComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.employee = this.data.getEmployee();
-    this.badges = this.data.getEmployeeBadges(this.id).pipe(share());
-    this.skills = this.data.getEmployeeSkills(this.id).pipe(share());
-    this.trophies = this.data.getEmployeeTrophies(this.id).pipe(share());
+    this.employee$ = this.data.getEmployee();
+    this.badges$ = this.data.getEmployeeBadges(this.id).pipe(share());
+     this.data.getEmployeeSkills(this.id).subscribe(
+      data => this.skills$ = data
+    );
+    this.trophies$ = this.data.getEmployeeTrophies(this.id).pipe(share());
   }
 
   setToUpdate(toUpdate) {
@@ -41,13 +45,16 @@ export class EmployeePortalComponent implements OnInit {
 
   createSkill(id, skill) {
     this.data.createSkill(id, skill).subscribe(
-      data => this.skill = data
+        data => this.skill = data
     );
     this.setToAddSkills(false);
+    this.skills$.push(skill);
   }
 
   updateEmployee(id, employee) {
-    this.employee = this.data.update(id, employee);
+    this.employee$ = this.data.update(id, employee);
     this.setToUpdate(false);
   }
+
+  get diagnostic() { return JSON.stringify(this.skills$); }
 }

@@ -1,10 +1,9 @@
 <div class="container">
   <div class="row">
 
-
     <div class="col-md-7 ">
 
-      <div *ngIf="employee | async as emp;" class="panel panel-default">
+      <div *ngIf="employee$ | async as emp;" class="panel panel-default">
         <div class="panel-heading">
           <h4>User Profile</h4>
         </div>
@@ -98,13 +97,13 @@
               <div class="clearfix"></div>
               <div class="bot-border"></div>
 
-              <div *ngIf="badges | async as badgeList;">
-                <div *ngIf="badgeList.length > 0">
+              <div *ngIf="badges$ | async as badges;">
+                <div *ngIf="badges.length > 0">
                   <div class="col-sm-5 col-xs-6 tital ">Badges:</div>
                   <br/>
                   <br/>
 
-                  <div *ngFor="let badge of badgeList" class="col-sm-7">
+                  <div *ngFor="let badge of badges" class="col-sm-7">
                     {{ badge.name }}
                   </div>
                 </div>
@@ -113,8 +112,8 @@
               <div class="clearfix"></div>
               <div class="bot-border"></div>
               <br/>
-              <div *ngIf="skills | async as skillList;">
-                <div *ngIf="skillList.length > 0">
+              <!-- <div *ngIf="skills$ | async as skills;">-->
+                <div *ngIf="skills$ != undefined && skills$.length > 0">
                   <div class="col-sm-5 col-xs-6 tital ">Skills:
                     <button (click)="setToAddSkills(true)" class="btn btn-primary btn-xs a-btn-slide-text">
                       <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
@@ -133,7 +132,7 @@
                     </span>
                   </button>
                   <br/>
-                  <div *ngFor="let skill of skillList" class="col-sm-7">
+                  <div *ngFor="let skill of skills$" class="col-sm-7">
                     <a href="#" class="btn btn-primary btn-xs a-btn-slide-text">
                       <span>
                         <strong>{{ skill.name }} </strong>
@@ -142,17 +141,17 @@
                     </a>
                   </div>
                 </div>
-              </div>
+             <!-- </div> -->
 
               <div class="clearfix"></div>
               <div class="bot-border"></div>
               <br/>
-              <div *ngIf="trophies | async as trophyList;">
-                <div *ngIf="trophyList.length > 0">
+              <div *ngIf="trophies$ | async as trophies;">
+                <div *ngIf="trophies.length > 0">
                   <div class="col-sm-5 col-xs-6 tital ">Trophies:</div>
                   <br/>
                   <br/>
-                  <div *ngFor="let trophy of trophyList" class="col-sm-7"> {{ trophy.name }} </div>
+                  <div *ngFor="let trophy of trophies" class="col-sm-7"> {{ trophy.name }} </div>
                 </div>
               </div>
 

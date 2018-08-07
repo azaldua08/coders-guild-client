@@ -29,7 +29,7 @@ export class DataService {
   }
 
   getEmployeeSkills(id) {
-    return this.http.get('http://localhost:8080/coders-guild/api/employeeskills/' + id);
+    return this.http.get<Object []>('http://localhost:8080/coders-guild/api/employeeskills/' + id);
   }
 
   createSkill(id, skill) {
