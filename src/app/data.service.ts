@@ -44,6 +44,10 @@ export class DataService {
     return this.http.put('http://localhost:8080/coders-guild/api/employee/' + id, employee);
   }
 
+  deleteSkill(id) {
+    return this.http.delete('http://localhost:8080/coders-guild/api/employeeskill/' + id);
+  }
+
   getEmployee() {
     return this.employee;
   }

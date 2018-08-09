@@ -133,12 +133,12 @@
                   </button>
                   <br/>
                   <div *ngFor="let skill of skills$" class="col-sm-7">
-                    <a href="#" class="btn btn-primary btn-xs a-btn-slide-text">
+                    <button (click)="deleteSkill(skill.id)" class="btn btn-primary btn-xs a-btn-slide-text">
                       <span>
                         <strong>{{ skill.name }} </strong>
                       </span>
                       <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
-                    </a>
+                    </button>
                   </div>
                 </div>
              <!-- </div> -->

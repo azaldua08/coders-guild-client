@@ -56,5 +56,13 @@ export class EmployeePortalComponent implements OnInit {
     this.setToUpdate(false);
   }
 
+  deleteSkill(id, skill) {
+     let index: number;
+     index = this.skills$.indexOf(skill);
+     this.data.deleteSkill(id).subscribe(
+        () => this.skills$.splice(index, 1)
+     );
+  }
+
   get diagnostic() { return JSON.stringify(this.skills$); }
 }
