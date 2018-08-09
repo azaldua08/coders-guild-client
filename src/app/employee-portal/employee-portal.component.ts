@@ -29,7 +29,7 @@ export class EmployeePortalComponent implements OnInit {
   ngOnInit() {
     this.employee$ = this.data.getEmployee();
     this.badges$ = this.data.getEmployeeBadges(this.id).pipe(share());
-     this.data.getEmployeeSkills(this.id).subscribe(
+    this.data.getEmployeeSkills(this.id).subscribe(
       data => this.skills$ = data
     );
     this.trophies$ = this.data.getEmployeeTrophies(this.id).pipe(share());
@@ -41,14 +41,18 @@ export class EmployeePortalComponent implements OnInit {
 
   setToAddSkills(toAddSkills) {
     this.toAddSkills = toAddSkills;
+    this.skill = new Object();
   }
 
   createSkill(id, skill) {
     this.data.createSkill(id, skill).subscribe(
-        data => this.skill = data
+        data => {
+          this.skill = data;
+          this.skills$.push(this.skill);
+        }
     );
     this.setToAddSkills(false);
-    this.skills$.push(skill);
+
   }
 
   updateEmployee(id, employee) {
