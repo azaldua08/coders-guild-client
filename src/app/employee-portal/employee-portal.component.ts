@@ -6,6 +6,7 @@ import { share, startWith } from 'rxjs/operators';
 import { combineLatest } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { Skill } from '../skill';
+import * as $ from 'jquery';
 
 @Component({
   selector: 'app-employee-portal',
@@ -23,7 +24,7 @@ export class EmployeePortalComponent implements OnInit {
   skill = new Object();
 
   constructor(private route: ActivatedRoute, private data: DataService) {
-    this.route.params.subscribe( params => this.id = params.id);
+    this.route.params.subscribe(params => this.id = params.id);
   }
 
   ngOnInit() {
@@ -33,6 +34,11 @@ export class EmployeePortalComponent implements OnInit {
       data => this.skills$ = data
     );
     this.trophies$ = this.data.getEmployeeTrophies(this.id).pipe(share());
+
+    $('div div div div.panel.panel-default').on('click', function () {
+      console.log('wedding');
+      $('.progress .progress-bar.six-sec-ease-in-out').css('width', 100 + '%');
+    });
   }
 
   setToUpdate(toUpdate) {
@@ -46,10 +52,10 @@ export class EmployeePortalComponent implements OnInit {
 
   createSkill(id, skill) {
     this.data.createSkill(id, skill).subscribe(
-        data => {
-          this.skill = data;
-          this.skills$.push(this.skill);
-        }
+      data => {
+        this.skill = data;
+        this.skills$.push(this.skill);
+      }
     );
     this.setToAddSkills(false);
 
@@ -61,11 +67,11 @@ export class EmployeePortalComponent implements OnInit {
   }
 
   deleteSkill(id, skill) {
-     let index: number;
-     index = this.skills$.indexOf(skill);
-     this.data.deleteSkill(id).subscribe(
-        () => this.skills$.splice(index, 1)
-     );
+    let index: number;
+    index = this.skills$.indexOf(skill);
+    this.data.deleteSkill(id).subscribe(
+      () => this.skills$.splice(index, 1)
+    );
   }
 
   get diagnostic() { return JSON.stringify(this.skills$); }
