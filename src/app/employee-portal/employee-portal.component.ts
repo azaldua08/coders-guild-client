@@ -34,11 +34,8 @@ export class EmployeePortalComponent implements OnInit {
       data => this.skills$ = data
     );
     this.trophies$ = this.data.getEmployeeTrophies(this.id).pipe(share());
+    this.loadSkillBar();
 
-    $('div div div div.panel.panel-default').on('click', function () {
-      console.log('wedding');
-      $('.progress .progress-bar.six-sec-ease-in-out').css('width', 100 + '%');
-    });
   }
 
   setToUpdate(toUpdate) {
@@ -55,9 +52,11 @@ export class EmployeePortalComponent implements OnInit {
       data => {
         this.skill = data;
         this.skills$.push(this.skill);
+        this.loadSkillBar();
       }
     );
     this.setToAddSkills(false);
+
 
   }
 
@@ -74,5 +73,21 @@ export class EmployeePortalComponent implements OnInit {
     );
   }
 
-  get diagnostic() { return JSON.stringify(this.skills$); }
+  loadSkillBar() {
+    $('#main-div').on('skillbar', function () {
+      console.log('wedding');
+      setTimeout(function () {
+        console.log('floor');
+        $('.progress .progress-bar.six-sec-ease-in-out').each(function () {
+          $(this).css('width', $(this).attr('aria-valuenow')
+            + '%');
+        });
+      }, 300);
+
+
+
+    });
+
+    $('#main-div').trigger('skillbar');
+  }
 }

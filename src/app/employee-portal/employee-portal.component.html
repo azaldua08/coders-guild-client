@@ -1,8 +1,7 @@
 <div class="container">
   <div class="row">
 
-    <div class="col-md-7 ">
-
+    <div id="main-div" class="col-md-7 ">
       <div *ngIf="employee$ | async as emp;" id="panel" class="panel panel-default">
         <div class="panel-heading">
           <h4>User Profile</h4>
@@ -32,7 +31,6 @@
 
                 <!-- /input-group -->
               </div>
-
               <div class="col-sm-6">
                 <h4 style="color:#00b1b1;">{{ emp.name }} </h4>
 
@@ -125,6 +123,8 @@
                 <br/>
                 <input *ngIf="toAddSkills" class="form-control" placeholder="Add Skill" id="" type="text" autofocus="" required [(ngModel)]="skill.name"
                   name="skill" #skillModel="ngModel">
+                <input *ngIf="toAddSkills" class="form-control" placeholder="Skill Level" id="" type="number" autofocus="" required [(ngModel)]="skill.level"
+                  name="skill" #skillModel="ngModel">
                 <button *ngIf="toAddSkills" (click)="createSkill(emp.id, skill)" type="button" class="btn btn-primary a-btn-slide-text">
                   <span class="glyphicon glyphicon-save" aria-hidden="true"></span>
                   <span>
@@ -140,8 +140,8 @@
                       <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
                     </button>-->
                   <div class="progress progress-striped active">
-                    <div class="progress-bar progress-bar-info six-sec-ease-in-out" role="progressbar" 
-                    aria-valuenow="80" aria-valuemin="0" aria-valuemax="100">{{ skill.name }} {{ (100/5)*skill.level }}</div>
+                    <div class="progress-bar progress-bar-info six-sec-ease-in-out" role="progressbar" attr.aria-valuenow="{{ (100/5)*skill.level }}"
+                      aria-valuemin="0" aria-valuemax="100">{{ skill.name }} {{ (100/5)*skill.level }}</div>
                   </div>
                 </div>
               </div>
