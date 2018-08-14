@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { Skill } from './skill';
 
 @Injectable({
   providedIn: 'root'
@@ -33,7 +34,7 @@ export class DataService {
   }
 
   createSkill(id, skill) {
-    return this.http.post('http://localhost:8080/coders-guild/api/employeeskill/add/' + id, skill);
+    return this.http.post<Skill>('http://localhost:8080/coders-guild/api/employeeskill/add/' + id, skill);
   }
 
   getEmployeeTrophies(id) {

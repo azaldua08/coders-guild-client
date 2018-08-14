@@ -21,7 +21,7 @@ export class EmployeePortalComponent implements OnInit {
   id: Object;
   toUpdate: boolean;
   toAddSkills: boolean;
-  skill = new Object();
+  skill = new Skill('', 0);
 
   constructor(private route: ActivatedRoute, private data: DataService) {
     this.route.params.subscribe(params => this.id = params.id);
@@ -44,7 +44,7 @@ export class EmployeePortalComponent implements OnInit {
 
   setToAddSkills(toAddSkills) {
     this.toAddSkills = toAddSkills;
-    this.skill = new Object();
+    this.skill = new Skill('', 0);
   }
 
   createSkill(id, skill) {
@@ -75,14 +75,14 @@ export class EmployeePortalComponent implements OnInit {
 
   loadSkillBar() {
     $('#main-div').on('skillbar', function () {
-      console.log('wedding');
+
       setTimeout(function () {
-        console.log('floor');
+
         $('.progress .progress-bar.six-sec-ease-in-out').each(function () {
           $(this).css('width', $(this).attr('aria-valuenow')
             + '%');
         });
-      }, 300);
+      }, 1000);
 
 
 
