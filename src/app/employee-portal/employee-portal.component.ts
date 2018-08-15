@@ -1,4 +1,4 @@
-import { Component, OnInit, DoCheck } from '@angular/core';
+import { Component, OnInit, DoCheck, AfterViewInit, AfterViewChecked } from '@angular/core';
 import { DataService } from '../data.service';
 import { Observable } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
@@ -13,7 +13,7 @@ import * as $ from 'jquery';
   templateUrl: './employee-portal.component.html',
   styleUrls: ['./employee-portal.component.css']
 })
-export class EmployeePortalComponent implements OnInit {
+export class EmployeePortalComponent implements AfterViewChecked, OnInit {
   employee$: Observable<Object>;
   badges$: Observable<Object>;
   skills$: Object[];
@@ -38,6 +38,10 @@ export class EmployeePortalComponent implements OnInit {
 
   }
 
+  ngAfterViewChecked() {
+    $('#main-div').trigger('skillbar');
+  }
+
   setToUpdate(toUpdate) {
     this.toUpdate = toUpdate;
   }
@@ -52,7 +56,7 @@ export class EmployeePortalComponent implements OnInit {
       data => {
         this.skill = data;
         this.skills$.push(this.skill);
-        this.loadSkillBar();
+        $('#main-div').trigger('skillbar');
       }
     );
     this.setToAddSkills(false);
@@ -74,20 +78,13 @@ export class EmployeePortalComponent implements OnInit {
   }
 
   loadSkillBar() {
+
     $('#main-div').on('skillbar', function () {
-
-      setTimeout(function () {
-
-        $('.progress .progress-bar.six-sec-ease-in-out').each(function () {
-          $(this).css('width', $(this).attr('aria-valuenow')
-            + '%');
-        });
-      }, 1000);
-
-
-
+      $('.progress .progress-bar.six-sec-ease-in-out').each(function () {
+        $(this).css('width', $(this).attr('aria-valuenow')
+          + '%');
+      });
     });
 
-    $('#main-div').trigger('skillbar');
   }
 }
