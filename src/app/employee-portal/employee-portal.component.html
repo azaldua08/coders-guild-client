@@ -69,6 +69,15 @@
               <div class="clearfix"></div>
               <div class="bot-border"></div>
 
+              <div class="col-sm-5 col-xs-6 tital ">Email:</div>
+              <div class="col-sm-7 col-xs-6">
+                <input *ngIf="toUpdate; else dispEmail " class="form-control" placeholder="Email" id="email" type="text" autofocus=""
+                  required [(ngModel)]="emp.email" name="email" #username="ngModel">
+                <ng-template #dispEmail> {{ emp.email }}</ng-template>
+              </div>
+              <div class="clearfix"></div>
+              <div class="bot-border"></div>
+
               <div class="col-sm-5 col-xs-6 tital ">Guild:</div>
               <div class="col-sm-7 col-xs-6 ">
                 <input *ngIf="toUpdate; else dispGuild " class="form-control" placeholder="Guild" id="guild" type="text" autofocus="" required

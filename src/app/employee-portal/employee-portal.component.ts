@@ -2,9 +2,7 @@ import { Component, OnInit, DoCheck, AfterViewInit, AfterViewChecked } from '@an
 import { DataService } from '../data.service';
 import { Observable } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
-import { share, startWith } from 'rxjs/operators';
-import { combineLatest } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { share } from 'rxjs/operators';
 import { Skill } from '../skill';
 import * as $ from 'jquery';
 

@@ -1,3 +1,170 @@
-<p>
-  admin-portal works!
-</p>
+<div *ngIf="success" class="alert alert-success" role="alert">
+  Employee created successfully
+</div>
+<div class="container" style="margin-top:30px">
+  <div class="col-md-12">
+    <div class="modal-dialog" style="margin-bottom:0">
+      <div class="modal-content">
+        <div class="panel-heading">
+          <h3 class="panel-title">Create Employee</h3>
+        </div>
+        <div class="panel-body">
+          <form role="form">
+            <fieldset>
+              <div class="form-group">
+                <label for="name" class="cols-sm-2 control-label">Name</label>
+                <div class="cols-sm-10">
+                  <div class="input-group">
+                    <span class="input-group-addon">
+                      <i class="fa fa-user fa" aria-hidden="true"></i>
+                    </span>
+                    <input type="text" class="form-control" id="name" placeholder="Enter your Name" required [(ngModel)]="emp.name" name="name"
+                      #name="ngModel" />
+                  </div>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label for="email" class="cols-sm-2 control-label">Email</label>
+                <div class="cols-sm-10">
+                  <div class="input-group">
+                    <span class="input-group-addon">
+                      <i class="fa fa-envelope fa" aria-hidden="true"></i>
+                    </span>
+                    <input type="text" class="form-control" id="email" placeholder="Enter your Email" required [(ngModel)]="emp.email" name="email"
+                      #email="ngModel" />
+                  </div>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label for="username" class="cols-sm-2 control-label">Username</label>
+                <div class="cols-sm-10">
+                  <div class="input-group">
+                    <span class="input-group-addon">
+                      <i class="fa fa-user-circle" aria-hidden="true"></i>
+                    </span>
+                    <input type="text" class="form-control" id="username" placeholder="Enter your Username" required [(ngModel)]="emp.username"
+                      name="username" #username="ngModel">
+                  </div>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label for="password" class="cols-sm-2 control-label">Password</label>
+                <div class="cols-sm-10">
+                  <div class="input-group">
+                    <span class="input-group-addon">
+                      <i class="fa fa-lock fa-lg" aria-hidden="true"></i>
+                    </span>
+                    <input type="password" class="form-control" name="password" id="password" placeholder="Enter your Password" required [(ngModel)]="emp.password"
+                      name="password" #password="ngModel" />
+                  </div>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label for="confirm" class="cols-sm-2 control-label">Confirm Password</label>
+                <div class="cols-sm-10">
+                  <div class="input-group">
+                    <span class="input-group-addon">
+                      <i class="fa fa-lock fa-lg" aria-hidden="true"></i>
+                    </span>
+                    <input type="password" class="form-control" name="confirm" id="confirm" placeholder="Confirm your Password" />
+                  </div>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label for="guild" class="cols-sm-2 control-label">Guild</label>
+                <div class="cols-sm-6">
+                  <div class="input-group">
+                    <span class="input-group-addon">
+                      <i class="fa fa-users fa" aria-hidden="true"></i>
+                    </span>
+                    <select (change)="setJobClass(emp)" class="form-control form-control-sm" id="" required [(ngModel)]="emp.guild" name="guild"
+                      #guild="ngModel">
+                      <option value="" selected disabled>Please select Guild..</option>
+                      <option value="Knights of the Round Table">Knights of the Round Table</option>
+                      <option value="Legion of Arrows">Legion of Arrows</option>
+                      <option value="Circle of Magicians">Circle of Magicians</option>
+                      <option value="Shadow Brotherhood">Shadow Brotherhood</option>
+                      <option value="The Elder Council">The Elder Council</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label for="jobClass" class="cols-sm-2 control-label">Job Class</label>
+                <div class="cols-sm-10">
+                  <div class="input-group">
+                    <span class="input-group-addon">
+                      <i class="fa fa-gavel fa" aria-hidden="true"></i>
+                    </span>
+                    <input type="text" class="form-control" id="jobClass" placeholder="Job Class" required [(ngModel)]="emp.jobClass" name="jobClass"
+                      #username="ngModel">
+                  </div>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label for="joinDate" class="cols-sm-2 control-label">Join Date</label>
+
+                <div class="cols-sm-10">
+                  <div class="input-group">
+                    <span class="input-group-addon">
+                      <i class="fa fa-calendar fa" aria-hidden="true"></i>
+                    </span>
+                    <input (click)="d.toggle()" class="form-control" type="text" ngbDatepicker #d="ngbDatepicker" [(ngModel)]="emp.joinDate"
+                      name="joinDate" />
+
+                  </div>
+                </div>
+
+              </div>
+
+              <div class="form-group">
+                <label for="avatar" class="cols-sm-2 control-label">Avatar</label>
+
+                <div class="cols-sm-10">
+                  <div class="input-group">
+                    <img alt="User Pic" src="{{ emp.avatar }}" id="avatar" class="img-thumbnail" style="width: 80px; height: 80px;"> &nbsp;&nbsp;&nbsp;
+                    <a type="button" id="button" class="btn btn-primary btn-sm" (click)="modal.show()">Select Avatar..</a>
+                    <app-avatar-modal #modal>
+                      <div class="app-avatar-modal-header">
+                        <h3>Select Avatar</h3>
+                      </div>
+                      <div class="app-avatar-modal-body">
+                        <div class="row">
+                          <div *ngFor="let avatar of avatars" class="col-sm-3">
+                            <a href="javascript:void(0)" type="img" (click)="setDefaultAvatar(avatar);modal.hide()">
+                              <img src="{{ avatar }}" style="width: 80px; height: 80px; margin: 20px;" class="zoom">
+                            </a>
+                          </div>
+                        </div>
+
+                      </div>
+
+
+                    </app-avatar-modal>
+
+
+                  </div>
+                </div>
+
+              </div>
+
+
+
+              <div class="form-group ">
+                <a (click)=createEmployee(emp) target="_blank" type="button" id="button" class="btn btn-primary btn-lg btn-block login-button">Register</a>
+              </div>
+            </fieldset>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+  <hr>
+</div>

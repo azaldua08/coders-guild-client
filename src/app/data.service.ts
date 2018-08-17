@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Skill } from './skill';
+import { Employee } from './employee';
 
 @Injectable({
   providedIn: 'root'
@@ -31,6 +32,10 @@ export class DataService {
 
   getEmployeeSkills(id) {
     return this.http.get<Object []>('http://localhost:8080/coders-guild/api/employeeskills/' + id);
+  }
+
+  createEmployee(employee) {
+    return this.http.post<Employee>('http://localhost:8080/coders-guild/api/employee/add', employee);
   }
 
   createSkill(id, skill) {
