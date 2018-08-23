@@ -3,9 +3,7 @@ import { User } from '../user';
 import { AuthService } from '../auth.service';
 import { DataService } from '../data.service';
 import { Observable, of } from 'rxjs';
-import { share } from 'rxjs/operators';
 import { Router } from '@angular/router';
-import { catchError } from 'rxjs/internal/operators';
 
 @Component({
   selector: 'app-login-form',

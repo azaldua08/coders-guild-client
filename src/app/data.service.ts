@@ -9,12 +9,11 @@ import { Employee } from './employee';
 })
 export class DataService {
   employee: Observable<Object>;
-  error: string;
   constructor(private http: HttpClient) { }
 
   getEmployeesByLevel() {
     // const headers = new HttpHeaders().set('Authorization', 'Basic ' + btoa('scarface08x:user123'));
-    return this.http.get('http://localhost:8080/coders-guild/api/employeesbylevel');
+    return this.http.get<Object []>('http://localhost:8080/coders-guild/api/employeesbylevel');
   }
 
   getEmployeesByBadge() {
@@ -54,6 +53,10 @@ export class DataService {
     return this.http.delete('http://localhost:8080/coders-guild/api/employeeskill/' + id);
   }
 
+  deleteEmployee(id) {
+    return this.http.delete('http://localhost:8080/coders-guild/api/employee/' + id);
+  }
+
   getEmployee() {
     return this.employee;
   }
@@ -62,7 +65,4 @@ export class DataService {
     this.employee = employee;
   }
 
-  setError(error) {
-    this.error = error;
-  }
 }
