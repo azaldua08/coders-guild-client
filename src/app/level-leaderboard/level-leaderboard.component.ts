@@ -49,6 +49,11 @@ export class LevelLeaderboardComponent implements OnInit {
           return acc.concat(val);
         }
       }));
+
+    this.mergedObj.subscribe(val => console.log(val[0]));
+    this.employeeSubj.next({
+      op: 'delete', id: 119
+    });
   }
 
   deleteUser(id, user) {

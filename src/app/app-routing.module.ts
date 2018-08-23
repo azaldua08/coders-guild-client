@@ -25,7 +25,8 @@ const routes: Routes = [
   },
   {
     path: 'home',
-    component: LevelLeaderboardComponent
+    component: LevelLeaderboardComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: 'leaders-level',
