@@ -21,6 +21,9 @@
                     <input type="text" class="form-control" id="name" placeholder="Enter your Name" required [(ngModel)]="emp.name" name="name"
                       #name="ngModel" />
                   </div>
+                  <div *ngIf="name.invalid && (name.dirty || name.touched)" class="alert alert-danger">
+                    <div> Name cannot be empty</div>
+                  </div>
                 </div>
               </div>
 
@@ -44,8 +47,12 @@
                     <span class="input-group-addon">
                       <i class="fa fa-user-circle" aria-hidden="true"></i>
                     </span>
-                    <input type="text" class="form-control" id="username" placeholder="Enter your Username" required [(ngModel)]="emp.username"
-                      name="username" #username="ngModel">
+                    <input type="text" class="form-control" id="username" placeholder="Enter your Username" required minlength="5" [(ngModel)]="emp.username"
+                      name="username" #user="ngModel">
+
+                  </div>
+                  <div *ngIf="user.invalid && (user.dirty || user.touched)" class="alert alert-danger">
+                    <div> Username must be a minimum of 5 characters</div>
                   </div>
                 </div>
               </div>
@@ -102,8 +109,8 @@
                     <span class="input-group-addon">
                       <i class="fa fa-gavel fa" aria-hidden="true"></i>
                     </span>
-                    <input type="text" class="form-control" id="jobClass" placeholder="Job Class" required [(ngModel)]="emp.jobClass" name="jobClass"
-                      #username="ngModel">
+                    <input type="text" class="form-control" id="jobClass" placeholder="Job Class" required readonly [(ngModel)]="emp.jobClass"
+                      name="jobClass" #username="ngModel">
                   </div>
                 </div>
               </div>

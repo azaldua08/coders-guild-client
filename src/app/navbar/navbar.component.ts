@@ -12,14 +12,18 @@ import { Observable } from 'rxjs';
 export class NavbarComponent implements DoCheck {
   user = new User('', '');
   employee: Observable<Object>;
+  loggedIn: boolean;
   constructor(public authService: AuthService, public data: DataService) { }
 
   ngDoCheck() {
     this.user = this.authService.getBasicAuth();
+    this.loggedIn = this.authService.isLoggedIn;
     this.employee = this.data.getEmployee();
   }
 
   onLogout() {
     this.authService.setBasicAuth(new User('', ''));
+    this.authService.setLoggedIn(false);
+    this.loggedIn = false;
   }
 }

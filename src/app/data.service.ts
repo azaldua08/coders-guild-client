@@ -9,7 +9,7 @@ import { Employee } from './employee';
 })
 export class DataService {
   employee: Observable<Object>;
-
+  error: string;
   constructor(private http: HttpClient) { }
 
   getEmployeesByLevel() {
@@ -60,5 +60,9 @@ export class DataService {
 
   setEmployee(employee) {
     this.employee = employee;
+  }
+
+  setError(error) {
+    this.error = error;
   }
 }

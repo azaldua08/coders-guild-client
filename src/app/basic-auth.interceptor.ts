@@ -3,16 +3,20 @@ import {
   HttpRequest,
   HttpHandler,
   HttpEvent,
-  HttpInterceptor
+  HttpInterceptor,
+  HttpErrorResponse
 } from '@angular/common/http';
 import { AuthService } from './auth.service';
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { User } from './user';
+import { Router } from '@angular/router';
+import { catchError } from 'rxjs/internal/operators';
+
 
 @Injectable()
 export class BasicAuthInterceptor implements HttpInterceptor {
   user: User;
-  constructor(public auth: AuthService) {}
+  constructor(public auth: AuthService, private router: Router) { }
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     this.user = this.auth.getBasicAuth();
     request = request.clone({
@@ -22,4 +26,5 @@ export class BasicAuthInterceptor implements HttpInterceptor {
     });
     return next.handle(request);
   }
+
 }

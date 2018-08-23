@@ -5,6 +5,8 @@ import { BadgeLeaderboardComponent } from './badge-leaderboard/badge-leaderboard
 import { AdminPortalComponent } from './admin-portal/admin-portal.component';
 import { EmployeePortalComponent } from './employee-portal/employee-portal.component';
 import { LoginFormComponent } from './login-form/login-form.component';
+import { AuthGuard } from './auth-guard.service';
+import { AuthService } from './auth.service';
 
 const routes: Routes = [
   {
@@ -45,6 +47,10 @@ const routes: Routes = [
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
+  providers: [
+    AuthGuard,
+    AuthService
+  ]
 })
 export class AppRoutingModule { }

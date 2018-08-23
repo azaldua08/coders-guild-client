@@ -17,6 +17,7 @@ export class AdminPortalComponent implements OnInit {
   emp = new Employee('', '', '', '', '', '', 'Active', this.defaultAvatar, 'USER', '2014-07-20');
   success: boolean;
   avatars = new Array();
+  confirm: string;
 
   constructor(private formatter: NgbDateFRParserFormatter, private data: DataService, private modalService: NgbModal) { }
 

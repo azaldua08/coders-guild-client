@@ -5,6 +5,10 @@ import { User } from './user';
 })
 export class AuthService {
   user: User;
+  isLoggedIn = false;
+
+  // store the URL so we can redirect after logging in
+  redirectUrl: string;
   constructor() { }
 
   setBasicAuth(user: User) {
@@ -13,5 +17,9 @@ export class AuthService {
 
   getBasicAuth() {
     return this.user;
+  }
+
+  setLoggedIn(isLoggedIn) {
+    this.isLoggedIn = isLoggedIn;
   }
 }
