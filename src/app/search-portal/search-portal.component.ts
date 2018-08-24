@@ -56,6 +56,19 @@ export class SearchPortalComponent implements OnInit {
     );
   }
 
+  searchByFilters(name, guild, jobClass) {
+    if (this.users$.length > 0) {
+      this.users$.length = 0;
+    }
+
+    this.data.getEmployeesByFilters(name, guild, jobClass).subscribe(
+      data => {
+        this.users$ = data;
+        console.log(this.users$);
+      }
+    );
+  }
+
   private handleAuthError(err: any, username): Observable<any> {
     // handle your auth error or rethrow
     if (err.status === 404 || err.status === 500) {

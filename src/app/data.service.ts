@@ -13,7 +13,7 @@ export class DataService {
 
   getEmployeesByLevel() {
     // const headers = new HttpHeaders().set('Authorization', 'Basic ' + btoa('scarface08x:user123'));
-    return this.http.get<Object []>('http://localhost:8080/coders-guild/api/employeesbylevel');
+    return this.http.get<Object[]>('http://localhost:8080/coders-guild/api/employeesbylevel');
   }
 
   getEmployeesByBadge() {
@@ -26,6 +26,12 @@ export class DataService {
     return this.http.get<Object[]>('http://localhost:8080/coders-guild/api/employeesbyguild/' + guild);
   }
 
+  getEmployeesByFilters(name, guild, jobClass) {
+    // const headers = new HttpHeaders().set('Authorization', 'Basic ' + btoa('scarface08x:user123'));
+    return this.http.get<Object[]>('http://localhost:8080/coders-guild/api/employeesbyfilters?name=' + name
+      + '&guild=' + guild + '&jobClass=' + jobClass);
+  }
+
   getEmployeeByUsername(username) {
     return this.http.get('http://localhost:8080/coders-guild/api/employeebyusername/' + username);
   }
@@ -35,7 +41,7 @@ export class DataService {
   }
 
   getEmployeeSkills(id) {
-    return this.http.get<Object []>('http://localhost:8080/coders-guild/api/employeeskills/' + id);
+    return this.http.get<Object[]>('http://localhost:8080/coders-guild/api/employeeskills/' + id);
   }
 
   createEmployee(employee) {
