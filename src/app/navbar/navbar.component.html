@@ -9,8 +9,18 @@
           <a routerLink="/home">Home</a>
         </li>
 
-        <li *ngIf="(user !== undefined && user.username != '') && (emp.roles=='ADMIN')">
-          <a routerLink="/admin-portal">Admin Portal</a>
+        <li class="dropdown" *ngIf="(user !== undefined && user.username != '') && (emp.roles=='ADMIN')">
+          <a class="dropdown-toggle" data-toggle="dropdown" href="/admin-portal">Admin Portal
+          <span class="caret"></span>
+          </a>
+          <ul class="dropdown-menu">
+            <li>
+              <a routerLink="/admin-portal/search-emp">Search Employee</a>
+            </li>
+            <li>
+              <a routerLink="/admin-portal/create-emp">Create Employee</a>
+            </li>
+          </ul>
         </li>
 
         <li *ngIf="user !== undefined && user.username != ''">

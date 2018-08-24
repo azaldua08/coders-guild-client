@@ -21,6 +21,11 @@ export class DataService {
     return this.http.get('http://localhost:8080/coders-guild/api/employeesbybadges');
   }
 
+  getEmployeesByGuild(guild) {
+    // const headers = new HttpHeaders().set('Authorization', 'Basic ' + btoa('scarface08x:user123'));
+    return this.http.get<Object[]>('http://localhost:8080/coders-guild/api/employeesbyguild/' + guild);
+  }
+
   getEmployeeByUsername(username) {
     return this.http.get('http://localhost:8080/coders-guild/api/employeebyusername/' + username);
   }

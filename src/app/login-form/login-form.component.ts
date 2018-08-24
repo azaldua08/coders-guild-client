@@ -32,10 +32,8 @@ export class LoginFormComponent implements OnInit {
       },
       error => {
         console.log('error');
-        this.error = 'Error';
         // Store the attempted URL for redirecting
         this.handleAuthError(error);
-        return false;
       },
       () => {
         this.router.navigate(['/home']);

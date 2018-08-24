@@ -25,7 +25,7 @@ export class LevelLeaderboardComponent implements OnInit {
 
 
 
-    // this.mockDeleteObservable();
+     this.mockDeleteObservable();
   }
 
   deleteUser2(id) {
@@ -50,10 +50,10 @@ export class LevelLeaderboardComponent implements OnInit {
         }
       }));
 
-    this.mergedObj.subscribe(val => console.log(val[0]));
-    this.employeeSubj.next({
-      op: 'delete', id: 119
-    });
+    this.mergedObj.subscribe(val => console.log(val));
+    // this.employeeSubj.next({
+    //   op: 'delete', id: 119
+    // });
   }
 
   deleteUser(id, user) {

@@ -19,6 +19,7 @@ import { FormsModule } from '@angular/forms';
 
 import { NgbDateFRParserFormatter } from './ngb-date-fr-parser-formatter';
 import { AvatarModalComponent } from './avatar-modal/avatar-modal.component';
+import { SearchPortalComponent } from './search-portal/search-portal.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +31,8 @@ import { AvatarModalComponent } from './avatar-modal/avatar-modal.component';
     LevelLeaderboardComponent,
     BadgeLeaderboardComponent,
     LoginFormComponent,
-    AvatarModalComponent
+    AvatarModalComponent,
+    SearchPortalComponent
   ],
   imports: [
     BrowserModule,
