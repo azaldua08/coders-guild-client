@@ -20,6 +20,7 @@ import { FormsModule } from '@angular/forms';
 import { NgbDateFRParserFormatter } from './ngb-date-fr-parser-formatter';
 import { AvatarModalComponent } from './avatar-modal/avatar-modal.component';
 import { SearchPortalComponent } from './search-portal/search-portal.component';
+import { BulkCreateComponent } from './bulk-create/bulk-create.component';
 
 @NgModule({
   declarations: [
@@ -32,7 +33,8 @@ import { SearchPortalComponent } from './search-portal/search-portal.component';
     BadgeLeaderboardComponent,
     LoginFormComponent,
     AvatarModalComponent,
-    SearchPortalComponent
+    SearchPortalComponent,
+    BulkCreateComponent
   ],
   imports: [
     BrowserModule,

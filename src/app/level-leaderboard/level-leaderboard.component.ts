@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { DataService } from '../data.service';
-import { Observable, of } from 'rxjs';
-import { share, merge, startWith, scan } from 'rxjs/operators';
+import { Observable, of, from } from 'rxjs';
+import { share, merge, startWith, scan, map } from 'rxjs/operators';
 import { Subject } from 'rxjs';
 
 @Component({
@@ -18,11 +18,13 @@ export class LevelLeaderboardComponent implements OnInit {
   constructor(private data: DataService) { }
 
   ngOnInit() {
-    this.data.getEmployeesByLevel().subscribe(
+    from(this.data.getEmployeesByLevel()).subscribe(
       data => this.users$ = data
+
     );
     this.employee$ = this.data.getEmployee().pipe(share());
-
+    // how to filter an array: https://stackoverflow.com/questions/43430715/angular-filter-observable-array
+    // of([1, 2, 3, 4]).pipe(map(val => val.filter(vala => vala < 4))).subscribe(data => console.log(data));
 
 
      this.mockDeleteObservable();

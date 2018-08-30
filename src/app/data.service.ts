@@ -48,6 +48,10 @@ export class DataService {
     return this.http.post<Employee>('http://localhost:8080/coders-guild/api/employee/add', employee);
   }
 
+  bulkCreateEmployee(employees) {
+    return this.http.post<Employee []>('http://localhost:8080/coders-guild/api/employee/addbatch', employees);
+  }
+
   createSkill(id, skill) {
     return this.http.post<Skill>('http://localhost:8080/coders-guild/api/employeeskill/add/' + id, skill);
   }

@@ -3,6 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { LevelLeaderboardComponent } from './level-leaderboard/level-leaderboard.component';
 import { BadgeLeaderboardComponent } from './badge-leaderboard/badge-leaderboard.component';
 import { AdminPortalComponent } from './admin-portal/admin-portal.component';
+import { BulkCreateComponent } from './bulk-create/bulk-create.component';
 import { SearchPortalComponent } from './search-portal/search-portal.component';
 import { EmployeePortalComponent } from './employee-portal/employee-portal.component';
 import { LoginFormComponent } from './login-form/login-form.component';
@@ -36,6 +37,11 @@ const routes: Routes = [
   {
     path: 'leaders-badges',
     component: BadgeLeaderboardComponent
+  },
+  {
+    path: 'admin-portal/bulk-create',
+    component: BulkCreateComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: 'admin-portal/create-emp',

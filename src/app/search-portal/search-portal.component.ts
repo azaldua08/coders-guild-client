@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { DataService } from '../data.service';
 import { Observable } from 'rxjs';
-import { share } from '../../../node_modules/rxjs/operators';
+import { share, map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-search-portal',
@@ -13,10 +13,12 @@ export class SearchPortalComponent implements OnInit {
   users$ = new Array();
   constructor(private data: DataService) { }
   employee$: Observable<Object>;
+  filtered$: Observable<Object>;
   error = '';
 
   ngOnInit() {
     this.employee$ = this.data.getEmployee().pipe(share());
+    this.filterByStatus('active', 'Knights of the Round Table');
   }
 
   searchByUsername(username) {
@@ -40,6 +42,10 @@ export class SearchPortalComponent implements OnInit {
       }
     );
 
+  }
+
+  filterByStatus(status, guild) {
+    this.data.getEmployeesByGuild(guild).pipe(map( data => data.filter(val => console.log(val)))).subscribe();
   }
 
   searchByGuild(guild) {
@@ -81,6 +87,14 @@ export class SearchPortalComponent implements OnInit {
 
   setError(error) {
     this.error = error;
+  }
+
+  deleteUser(id, user) {
+    let index: number;
+    index = this.users$.indexOf(user);
+    this.data.deleteEmployee(id).subscribe(
+      () => this.users$.splice(index, 1)
+    );
   }
 
 }
