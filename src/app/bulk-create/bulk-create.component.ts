@@ -11,9 +11,11 @@ export class BulkCreateComponent implements OnInit {
   csvContent: string;
   defaultAvatar = 'https://bootdey.com/img/Content/avatar/avatar2.png';
   emp = new Employee('', '', '', '', '', '', 'Active', this.defaultAvatar, 'USER', '2014-07-20');
-  employees = new Array<Employee> ();
+  employees = new Array<Employee>();
   fileReader = new FileReader();
   fileToRead: File;
+  success: boolean;
+  error: string;
 
   constructor(private data: DataService) { }
 
@@ -50,13 +52,16 @@ export class BulkCreateComponent implements OnInit {
           this.emp.status = data[6];
           this.emp.joinDate = data[7];
           for (let j = 0; j < data.length; j++) {
-              console.log(data[j]);
+            console.log(data[j]);
           }
           this.employees.push(this.emp);
           this.emp = new Employee('', '', '', '', '', '', 'Active', this.defaultAvatar, 'USER', '2014-07-20');
         }
         console.log(this.employees);
-        this.data.bulkCreateEmployee(this.employees).subscribe(data => console.log(data));
+        this.data.bulkCreateEmployee(this.employees).subscribe(
+          data => console.log(data),
+          error =>  this.handleAuthError(error),
+          () => this.success = true);
         // console.log('CSV: ' + this.csvContent);
       };
 
@@ -66,6 +71,20 @@ export class BulkCreateComponent implements OnInit {
 
   bulkCreate() {
     this.fileReader.readAsText(this.fileToRead, 'UTF-8');
+  }
+
+  private handleAuthError(err: any) {
+    // handle your auth error or rethrow
+    if (err.status === 500 || err.status === 400) {
+      console.log('handled error ' + err.status);
+      this.setError('Something went wrong with Bulk Create. Please check the format of your csv file.');
+
+    }
+    throw err;
+  }
+
+  setError(error) {
+    this.error = error;
   }
 
 }
