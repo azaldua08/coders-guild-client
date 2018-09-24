@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Employee } from '../employee';
 import { DataService } from '../data.service';
-import { HttpErrorResponse } from '../../../node_modules/@angular/common/http';
+import { HttpErrorResponse, HttpHeaders } from '../../../node_modules/@angular/common/http';
 
 @Component({
   selector: 'app-bulk-create',
@@ -19,7 +19,8 @@ export class BulkCreateComponent implements OnInit {
   fileReader = new FileReader();
   fileToRead: File;
   success: boolean;
-  error: string;
+  errors = new Array<string>();
+  partiallyCreated: boolean;
 
   constructor(private data: DataService) { }
 
@@ -65,15 +66,20 @@ export class BulkCreateComponent implements OnInit {
           this.emp = new Employee('', '', '', '', '', '', 'Active', this.defaultAvatar, 'USER', '2014-07-20');
         }
         console.log(this.employees);
-        if (this.error !== undefined && this.error.length > 0) {
-          this.error = '';
+        if (this.errors !== undefined && this.errors.length > 0) {
+          this.errors.length = 0;
         }
         if (this.success) {
           this.success = false;
         }
         this.data.bulkCreateEmployee(this.employees).subscribe(
           data => console.log(data),
-          error => this.handleAuthError(error),
+          error => {
+            if (error.headers.get('partiallyCreated') === 'true') {
+              this.partiallyCreated = true;
+            }
+            this.handleAuthError(error);
+          },
           () => {
             this.success = true;
           });
@@ -92,14 +98,14 @@ export class BulkCreateComponent implements OnInit {
     // handle your auth error or rethrow
     if (err.status === 500 || err.status === 400) {
       console.log('handled error ' + err.status);
-      this.setError(err.error);
+      this.setErrors(err.error);
 
     }
-    throw err;
+     throw err;
   }
 
-  setError(error) {
-    this.error = error;
+  setErrors(errors) {
+    this.errors = errors;
   }
 
 }

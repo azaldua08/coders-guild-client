@@ -26,6 +26,7 @@ export class EmployeePortalComponent implements AfterViewChecked, OnInit {
   }
 
   ngOnInit() {
+    console.log('ngInit');
     this.employee$ = this.data.getEmployee();
     this.badges$ = this.data.getEmployeeBadges(this.id).pipe(share());
     this.data.getEmployeeSkills(this.id).subscribe(

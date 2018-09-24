@@ -32,11 +32,13 @@ const routes: Routes = [
   },
   {
     path: 'leaders-level',
-    component: LevelLeaderboardComponent
+    component: LevelLeaderboardComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: 'leaders-badges',
-    component: BadgeLeaderboardComponent
+    component: BadgeLeaderboardComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: 'admin-portal/bulk-create',
@@ -55,7 +57,8 @@ const routes: Routes = [
   },
   {
     path: 'employee-portal/:id',
-    component: EmployeePortalComponent
+    component: EmployeePortalComponent,
+    canActivate: [AuthGuard]
   }
 ];
 
