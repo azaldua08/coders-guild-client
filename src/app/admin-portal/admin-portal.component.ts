@@ -5,6 +5,7 @@ import { Employee } from '../employee';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { NgbDateFRParserFormatter } from '../ngb-date-fr-parser-formatter';
 import * as $ from 'jquery';
+import { HttpErrorResponse } from '@angular/common/http';
 
 
 @Component({
@@ -18,6 +19,7 @@ export class AdminPortalComponent implements OnInit {
   success: boolean;
   avatars = new Array();
   confirm: string;
+  errors = new Array<string>();
 
   constructor(private formatter: NgbDateFRParserFormatter, private data: DataService, private modalService: NgbModal) { }
 
@@ -33,10 +35,14 @@ export class AdminPortalComponent implements OnInit {
     emp.joinDate = this.formatter.format(emp.joinDate);
     this.data.createEmployee(emp).subscribe(
       data => {
-        this.emp = data;
-        if (this.emp.name.length > 0) {
-          this.success = true;
-        }
+        console.log(data);
+
+      },
+      error => {
+        this.handleAuthError(error);
+      },
+      () => {
+        this.success = true;
       }
     );
   }
@@ -80,5 +86,19 @@ export class AdminPortalComponent implements OnInit {
         $(this).removeClass('transition');
       });
     });
+  }
+
+  private handleAuthError(err: HttpErrorResponse) {
+    // handle your auth error or rethrow
+    if (err.status === 500 || err.status === 400) {
+      console.log('handled error ' + err.status);
+      this.setErrors(err.error);
+
+    }
+    throw err;
+  }
+
+  setErrors(errors) {
+    this.errors = errors;
   }
 }

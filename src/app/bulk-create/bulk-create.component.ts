@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Employee } from '../employee';
 import { DataService } from '../data.service';
-import { HttpErrorResponse, HttpHeaders } from '../../../node_modules/@angular/common/http';
+import { HttpErrorResponse } from '../../../node_modules/@angular/common/http';
 
 @Component({
   selector: 'app-bulk-create',

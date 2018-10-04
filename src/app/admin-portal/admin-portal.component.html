@@ -1,6 +1,11 @@
 <div *ngIf="success" class="alert alert-success" role="alert">
   Employee created successfully
 </div>
+<div *ngIf="errors != undefined && errors.length > 0">
+  <div *ngFor="let error of errors" class="alert alert-danger">
+    {{ error }}
+  </div>
+</div>
 <div class="container" style="margin-top:30px">
   <div class="col-md-12">
     <div class="modal-dialog" style="margin-bottom:0">
