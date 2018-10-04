@@ -21,6 +21,8 @@ import { NgbDateFRParserFormatter } from './ngb-date-fr-parser-formatter';
 import { AvatarModalComponent } from './avatar-modal/avatar-modal.component';
 import { SearchPortalComponent } from './search-portal/search-portal.component';
 import { BulkCreateComponent } from './bulk-create/bulk-create.component';
+import { EmailValidatorDirective } from './shared/valid-email.directive';
+import { ValidPasswordDirective } from './shared/valid-password.directive';
 
 @NgModule({
   declarations: [
@@ -34,7 +36,9 @@ import { BulkCreateComponent } from './bulk-create/bulk-create.component';
     LoginFormComponent,
     AvatarModalComponent,
     SearchPortalComponent,
-    BulkCreateComponent
+    BulkCreateComponent,
+    EmailValidatorDirective,
+    ValidPasswordDirective
   ],
   imports: [
     BrowserModule,
