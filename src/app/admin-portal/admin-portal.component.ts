@@ -17,6 +17,7 @@ export class AdminPortalComponent implements OnInit {
   defaultAvatar = 'https://bootdey.com/img/Content/avatar/avatar2.png';
   emp = new Employee('', '', '', '', '', '', 'Active', this.defaultAvatar, 'USER', '2014-07-20');
   success: boolean;
+  showPW: boolean;
   avatars = new Array();
   confirm: string;
   errors = new Array<string>();
@@ -100,5 +101,9 @@ export class AdminPortalComponent implements OnInit {
 
   setErrors(errors) {
     this.errors = errors;
+  }
+
+  showPassword() {
+    this.showPW = !this.showPW;
   }
 }

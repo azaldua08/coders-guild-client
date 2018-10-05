@@ -19,7 +19,7 @@ export class ValidPasswordDirective {
    @Input('appValidPassword') validPassword: string;
 
    validate(control: AbstractControl): {[key: string]: any} | null {
-     return this.validPassword ? validPasswordValidator(new RegExp(this.validPassword, 'i'))(control) : null;
+     return this.validPassword ? validPasswordValidator(new RegExp(this.validPassword))(control) : null;
    }
 
 }

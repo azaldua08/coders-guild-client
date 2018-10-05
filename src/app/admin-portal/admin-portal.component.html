@@ -78,15 +78,22 @@
                     <span class="input-group-addon">
                       <i class="fa fa-lock fa-lg" aria-hidden="true"></i>
                     </span>
-                    <!-- https://stackoverflow.com/questions/19605150/regex-for-password-must-contain-at-least-eight-characters-at-least-one-number-a -->
-                    <input type="password" class="form-control" name="password" id="password" placeholder="Enter your Password" required [(ngModel)]="emp.password"
-                      appValidPassword="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$" name="password" #password="ngModel" />
+                    <!-- https://stackoverflow.com/questions/33670870/regex-for-1-uppercase-1-special-character-and-1-lowecase?noredirect=1&lq=1 -->
+                    <!-- https://stackoverflow.com/questions/37266363/show-hide-password-text-using-angular2 -->
+                    <input [type]="showPW ? 'text' : 'password'" class="form-control" name="password" id="password" placeholder="Enter your Password"
+                      required [(ngModel)]="emp.password" appValidPassword="^(?=.{8,})(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@#$%^!&*+=]).*$"
+                      name="password" #password="ngModel" />
+                    <span class="input-group-addon">
+                      <i (click)="showPassword()" [class]="showPW ? 'far fa-eye-slash' : 'far fa-eye'"></i>
+                    </span>
+
                   </div>
                   <div *ngIf="password.errors?.required && (password.dirty || password.touched)" class="alert alert-danger">
                     <div> Password cannot be empty</div>
                   </div>
                   <div *ngIf="password.errors?.forbiddenPassword && (password.dirty || password.touched)" class="alert alert-danger">
-                    <div> Password must be at least eight characters and must have one of the ff: at least one uppercase letter, one lowercase letter and one number </div>
+                    <div> Password must be at least eight characters and must have the ff: one uppercase letter, one lowercase
+                      letter, one number, and a special character. </div>
                   </div>
                 </div>
               </div>
@@ -98,7 +105,18 @@
                     <span class="input-group-addon">
                       <i class="fa fa-lock fa-lg" aria-hidden="true"></i>
                     </span>
-                    <input type="password" class="form-control" name="confirm" id="confirm" placeholder="Confirm your Password" />
+                    <input [type]="showPW ? 'text' : 'password'" class="form-control" name="confirm" id="confirm" placeholder="Confirm your Password"
+                      ngModel required #confirm="ngModel" />
+                    <span class="input-group-addon">
+                      <i (click)="showPassword()" [class]="showPW ? 'far fa-eye-slash' : 'far fa-eye'"></i>
+                    </span>
+                  </div>
+                  <div *ngIf="confirm.errors?.required && (confirm.dirty || confirm.touched)" class="alert alert-danger">
+                    <div> Kindly confirm your password</div>
+                  </div>
+                  <!-- https://www.youtube.com/watch?v=fj8M-3vEVLc -->
+                  <div *ngIf="confirm.value !== password.value && (confirm.dirty || confirm.touched)" class="alert alert-danger">
+                    <div> Password does not match</div>
                   </div>
                 </div>
               </div>
